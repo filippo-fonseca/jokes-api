@@ -9,3 +9,20 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+//jokes
+model Joke {
+  id      String @id @default(cuid())
+  text    String
+  creator User   @relation(fields: [userId], references: [id])
+  userId  String
+}
+
+//user
+model User {
+  id   String @id @default(cuid())
+  name String
+  Joke Joke[]
+}
+
+//tags
